@@ -24,7 +24,7 @@ class Page(object):
         :param page_size:
         """
         self.item_count = item_count
-        self.page_index = page_index
+        self.page_size = page_size
         self.page_count = item_count // page_size + (1 if item_count % page_size > 0 else 0)
         if (item_count == 0) or (page_index > self.page_count):
             self.offset = 0
@@ -67,8 +67,8 @@ class APIResourceNotFoundError(APIError):
 
 class APIPermissionError(APIError):
     """Indicate the api has no permission."""
-    def __init__(self, field, message=''):
-        super(APIPermissionError, self).__init__('value:forbidden', field, message)
+    def __init__(self, message=''):
+        super(APIPermissionError, self).__init__('value:forbidden', 'permission', message)
 
 
 if __name__ == '__main__':
